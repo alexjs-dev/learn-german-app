@@ -189,4 +189,22 @@ export const levels: Word[][] = [
     { id: "10-14", german: "Herzlichen Glückwunsch", translations: { en: "Congratulations", ru: "Поздравляю" }, emoji: "🎉" },
     { id: "10-15", german: "Viel Erfolg", translations: { en: "Good luck", ru: "Удачи" }, emoji: "🍀" },
   ],
+  // Level 11 - Hospital & medical
+  [
+    { id: "11-1", german: "Krankenhaus", translations: { en: "Hospital", ru: "Больница" }, emoji: "🏥" },
+    { id: "11-2", german: "Notaufnahme", translations: { en: "Emergency room", ru: "Приёмный покой" }, emoji: "🚨" },
+    { id: "11-3", german: "Krankenwagen", translations: { en: "Ambulance", ru: "Скорая помощь" }, emoji: "🚑" },
+    { id: "11-4", german: "Krankenschwester", translations: { en: "Nurse", ru: "Медсестра" }, emoji: "👩‍⚕️" },
+    { id: "11-5", german: "Arzt", translations: { en: "Doctor", ru: "Врач" }, emoji: "👨‍⚕️" },
+    { id: "11-6", german: "Patient", translations: { en: "Patient", ru: "Пациент" }, emoji: "🤒" },
+    { id: "11-7", german: "Rezept", translations: { en: "Prescription", ru: "Рецепт" }, emoji: "📋" },
+    { id: "11-8", german: "Tablette", translations: { en: "Pill / Tablet", ru: "Таблетка" }, emoji: "💊" },
+    { id: "11-9", german: "Spritze", translations: { en: "Injection / Syringe", ru: "Укол / Шприц" }, emoji: "💉" },
+    { id: "11-10", german: "Blutdruck", translations: { en: "Blood pressure", ru: "Давление" }, emoji: "🩺" },
+    { id: "11-11", german: "Röntgen", translations: { en: "X-ray", ru: "Рентген" }, emoji: "🩻" },
+    { id: "11-12", german: "Operation", translations: { en: "Surgery", ru: "Операция" }, emoji: "🔪" },
+    { id: "11-13", german: "Verband", translations: { en: "Bandage", ru: "Бинт / Повязка" }, emoji: "🩹" },
+    { id: "11-14", german: "Krankenversicherung", translations: { en: "Health insurance", ru: "Медицинская страховка" }, emoji: "📄" },
+    { id: "11-15", german: "Ich brauche einen Arzt", translations: { en: "I need a doctor", ru: "Мне нужен врач" }, emoji: "🆘" },
+  ],
 ];
