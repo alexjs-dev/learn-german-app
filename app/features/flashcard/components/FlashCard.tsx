@@ -37,7 +37,7 @@ export const FlashCard = ({ word, language, soundEnabled }: FlashCardProps) => {
         )}
       >
         {/* Front - German */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-white border-2 border-gray-300 text-3xl font-bold text-gray-800 shadow-sm backface-hidden">
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-white border-2 border-gray-300 text-3xl font-bold text-gray-800 shadow-sm backface-hidden text-center px-4">
           {word.emoji && <span className="absolute top-3 text-2xl">{word.emoji}</span>}
           {word.german}
           <button
@@ -48,7 +48,7 @@ export const FlashCard = ({ word, language, soundEnabled }: FlashCardProps) => {
           </button>
         </div>
         {/* Back - Translation */}
-        <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-white border-2 border-gray-300 text-2xl font-semibold text-gray-800 shadow-sm backface-hidden rotate-y-180">
+        <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-white border-2 border-gray-300 text-2xl font-semibold text-gray-800 shadow-sm backface-hidden rotate-y-180 text-center px-4">
           {word.translations[language]}
         </div>
       </div>
