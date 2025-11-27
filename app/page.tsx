@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import classNames from "classnames";
 import { levels } from "./data/words";
 import { FlashCard } from "./features/flashcard";
@@ -8,7 +8,7 @@ import { useLevel, LevelIndicator, LevelComplete } from "./features/level_naviga
 
 type Language = "en" | "ru";
 
-const Home = () => {
+const HomeContent = () => {
   const { currentLevel, goToLevel, goToNextLevel } = useLevel();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -117,6 +117,14 @@ const Home = () => {
         </>
       )}
     </div>
+  );
+};
+
+const Home = () => {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center">Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 };
 
