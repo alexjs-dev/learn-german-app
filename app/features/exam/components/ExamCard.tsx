@@ -4,6 +4,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { Word } from "@/app/data/words";
 import { speakGerman } from "@/app/features/audio_speak";
+import { checkAnswer, highlightDifferences, hasActualMistakes } from "../utils";
 
 type Language = "en" | "ru";
 
@@ -17,18 +18,24 @@ interface ExamCardProps {
 
 export const ExamCard = ({ word, language, onSubmit, questionNumber, totalQuestions }: ExamCardProps) => {
   const [answer, setAnswer] = useState("");
-  const [feedback, setFeedback] = useState<{ correct: boolean; correctAnswer: string } | null>(null);
+  const [feedback, setFeedback] = useState<{ correct: boolean; correctAnswer: string; userAnswer: string; hasMistakes: boolean } | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const isCorrect = answer.toLowerCase().trim() === word.german.toLowerCase().trim();
-    setFeedback({ correct: isCorrect, correctAnswer: word.german });
+    const isCorrect = checkAnswer(answer, word.german);
+    const hasMistakes = hasActualMistakes(answer, word.german);
+    setFeedback({ 
+      correct: isCorrect, 
+      correctAnswer: word.german, 
+      userAnswer: answer,
+      hasMistakes 
+    });
     
     setTimeout(() => {
       onSubmit(answer);
       setAnswer("");
       setFeedback(null);
-    }, 2000);
+    }, 3500);
   };
 
   const handleHint = () => {
@@ -60,20 +67,34 @@ export const ExamCard = ({ word, language, onSubmit, questionNumber, totalQuesti
             "w-full px-4 py-3 rounded-xl border-2 text-center text-lg outline-none transition text-gray-900 placeholder:text-gray-500",
             feedback === null
               ? "border-gray-300 focus:border-gray-500"
-              : feedback.correct
+              : feedback.correct && !feedback.hasMistakes
               ? "border-green-500 bg-green-50"
+              : feedback.correct && feedback.hasMistakes
+              ? "border-orange-500 bg-orange-50"
               : "border-red-500 bg-red-50"
           )}
           autoFocus
         />
         
         {feedback && !feedback.correct && (
-          <span className="text-red-500 text-sm">
-            Correct: <strong>{feedback.correctAnswer}</strong>
-          </span>
+          <div className="text-red-500 text-sm text-center">
+            <div>Correct:</div>
+            <div className="text-gray-800 mt-1">
+              {highlightDifferences(feedback.userAnswer, feedback.correctAnswer)}
+            </div>
+          </div>
         )}
         
-        {feedback && feedback.correct && (
+        {feedback && feedback.correct && feedback.hasMistakes && (
+          <div className="text-orange-500 text-sm text-center">
+            <div className="font-medium mb-1">✓ Accepted (with typos)</div>
+            <div className="text-gray-800">
+              Correct: {highlightDifferences(feedback.userAnswer, feedback.correctAnswer)}
+            </div>
+          </div>
+        )}
+        
+        {feedback && feedback.correct && !feedback.hasMistakes && (
           <span className="text-green-500 text-sm font-medium">✓ Correct!</span>
         )}
 

@@ -117,7 +117,7 @@ const HomeContent = () => {
               : "text-gray-500 hover:text-gray-800"
           )}
         >
-          🇬🇧 English
+          English
         </button>
         <button
           onClick={() => setLanguage("ru")}
@@ -128,7 +128,7 @@ const HomeContent = () => {
               : "text-gray-500 hover:text-gray-800"
           )}
         >
-          🇷🇺 Русский
+          Русский
         </button>
       </div>
 

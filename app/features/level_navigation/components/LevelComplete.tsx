@@ -26,14 +26,12 @@ export const LevelComplete = ({ level, onNextLevel, onTakeExam, isLevelPassed }:
       </p>
       
       <div className="flex flex-col gap-3 w-64">
-        {!isLevelPassed && (
-          <button
-            onClick={onTakeExam}
-            className="rounded-full bg-gray-800 px-8 py-3 text-white transition hover:bg-gray-700"
-          >
-            📝 Take Exam
-          </button>
-        )}
+        <button
+          onClick={onTakeExam}
+          className="rounded-full border-2 border-gray-800 bg-white px-8 py-3 text-gray-800 font-semibold transition hover:bg-gray-50"
+        >
+          📝 {isLevelPassed ? "Retake Exam" : "Take Exam"}
+        </button>
         
         {!isLastLevel && (
           <button

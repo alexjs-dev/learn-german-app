@@ -4,6 +4,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { Word } from "@/app/data/words";
 import { speakGerman, useSpeakOnChange } from "@/app/features/audio_speak";
+import { useTutorial, TutorialFinger } from "@/app/features/tutorial";
 import { CARD_WIDTH, CARD_HEIGHT, FLIP_DURATION } from "../consts";
 
 type Language = "en" | "ru";
@@ -16,6 +17,7 @@ interface FlashCardProps {
 
 export const FlashCard = ({ word, language, soundEnabled }: FlashCardProps) => {
   const [flipped, setFlipped] = useState(false);
+  const { showTutorial, isRemoving, dismissTutorial } = useTutorial();
 
   useSpeakOnChange(word.german, soundEnabled);
 
@@ -24,11 +26,19 @@ export const FlashCard = ({ word, language, soundEnabled }: FlashCardProps) => {
     speakGerman(word.german, true);
   };
 
+  const handleCardClick = () => {
+    if (showTutorial && !isRemoving) {
+      dismissTutorial();
+    }
+    setFlipped(!flipped);
+  };
+
   return (
     <div
-      className={classNames("perspective-1000 cursor-pointer", CARD_HEIGHT, CARD_WIDTH)}
-      onClick={() => setFlipped(!flipped)}
+      className={classNames("perspective-1000 cursor-pointer relative", CARD_HEIGHT, CARD_WIDTH)}
+      onClick={handleCardClick}
     >
+      {showTutorial && <TutorialFinger isRemoving={isRemoving} />}
       <div
         className={classNames(
           "relative h-full w-full transition-transform transform-style-3d",
