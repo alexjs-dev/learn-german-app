@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { Word } from "@/app/data/words";
 import { speakGerman } from "@/app/features/audio_speak";
@@ -19,6 +19,14 @@ interface ExamCardProps {
 export const ExamCard = ({ word, language, onSubmit, questionNumber, totalQuestions }: ExamCardProps) => {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState<{ correct: boolean; correctAnswer: string; userAnswer: string; hasMistakes: boolean } | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Focus input when new question appears
+  useEffect(() => {
+    if (feedback === null && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [word.id, feedback]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,6 +66,7 @@ export const ExamCard = ({ word, language, onSubmit, questionNumber, totalQuesti
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-3 w-72">
         <input
+          ref={inputRef}
           type="text"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
