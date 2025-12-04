@@ -39,11 +39,14 @@ export const ExamCard = ({ word, language, onSubmit, questionNumber, totalQuesti
       hasMistakes 
     });
     
+    // Shorter delay for correct answers, longer for incorrect
+    const delay = isCorrect ? 800 : 3500;
+    
     setTimeout(() => {
       onSubmit(answer);
       setAnswer("");
       setFeedback(null);
-    }, 3500);
+    }, delay);
   };
 
   const handleHint = () => {
